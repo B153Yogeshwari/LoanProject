@@ -12,7 +12,5 @@ public class EnquiryModel {
 	private long mobileNumber;
 	private long adharNumber;
 	private String panCardNumber;
-	private String cityName;
-	private String defgh;
-	private int kid;
+	
 }
