@@ -31,6 +31,14 @@ public class CustomerDetails {
 	private GuarantorDetails gurantorDetails;
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerAddress customerAddress;
+	@OneToOne(cascade = CascadeType.ALL)
+	private LoanDisbursement loanDisbursement;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Ledger ledger;
+	@OneToOne(cascade = CascadeType.ALL)
+	private SanctionLetter sanctionletter;
+	@OneToOne(cascade = CascadeType.ALL)
+	private CustomerVerification customerVerification;
 	
 	
 	
