@@ -13,5 +13,5 @@ public class EnquiryModel {
 	private long adharNumber;
 	private String panCardNumber;
 	private String address;
-
+	private int kid;
 }
