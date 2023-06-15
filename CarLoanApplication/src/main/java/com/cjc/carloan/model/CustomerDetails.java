@@ -1,5 +1,8 @@
 package com.cjc.carloan.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
+
 import lombok.Data;
 
 @Data
@@ -17,10 +20,18 @@ public class CustomerDetails {
 	private String customerQualification;
 	private String customerEmailId;
 	private Double customerTotalLoanRequired;
-	
-	//private Integer customerCibilScore;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Cibil customerCibilScore;
 	private String customerLoanStatus;
-	//private CarDetails 
+	@OneToOne(cascade = CascadeType.ALL)
+	private CarDetails carDetails;
+	@OneToOne(cascade = CascadeType.ALL)
+	private AccountDetails accountDetails;
+	@OneToOne(cascade = CascadeType.ALL)
+	private GuarantorDetails gurantorDetails;
+	@OneToOne(cascade = CascadeType.ALL)
+	private CustomerAddress customerAddress;
+	
 	
 	
 	
