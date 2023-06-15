@@ -6,7 +6,7 @@ import lombok.Data;
      @Data
 	public class CustomerAddress 
 	{
-		private Integer customerAddressId;// customerAddressId;
+		private Integer customerAddressId;
 		private String localAreaName;
 		private String localCityName;
 		private String localDistrict;
