@@ -10,7 +10,7 @@ public class PermanentAddress {
 	private String permanentDistrict;
 	private String permanentState;
 	private Long permanentPincode;
-	private String permanentHouseNumber;
+	private Integer permanentHouseNumber;
 	private String permanentStreetName;
 
 }
