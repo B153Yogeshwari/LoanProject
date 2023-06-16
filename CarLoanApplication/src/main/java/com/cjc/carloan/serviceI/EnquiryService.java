@@ -1,5 +1,13 @@
 package com.cjc.carloan.serviceI;
 
-public interface EnquiryService {
+import com.cjc.carloan.model.EnquiryModel;
 
+public interface EnquiryService 
+{
+
+	public void saveData(EnquiryModel em);
+
+	public Iterable<EnquiryModel> getAllData();
+
+	   
 }

@@ -12,6 +12,7 @@ import lombok.Data;
     	 private Integer customerAddressId;
     	 @OneToOne(cascade = CascadeType.ALL)
 		private PermanentAddress permanentAddress;
+    	 
     	 @OneToOne(cascade = CascadeType.ALL)
     	 private LocalAddress localAddress;
 		
