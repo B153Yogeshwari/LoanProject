@@ -10,7 +10,7 @@ public class LocalAddress {
 	private String localDistrict;
 	private String localState;
 	private Long localPincode;
-	private String localHouseNumber;
+	private Integer localHouseNumber;
 	private String localStreetName;
 
 }

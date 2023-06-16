@@ -30,6 +30,8 @@ public class CustomerDetails
 	private Double customerTotalLoanRequired;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Cibil customerCibilScore;
+	@OneToOne(cascade = CascadeType.ALL)
+	private AllPersonalDocuments documents;
 	private String customerLoanStatus;
 	@OneToOne(cascade = CascadeType.ALL)
 	private CarDetails carDetails;
