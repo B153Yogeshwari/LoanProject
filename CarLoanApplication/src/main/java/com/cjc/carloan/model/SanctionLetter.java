@@ -1,3 +1,4 @@
+
 package com.cjc.carloan.model;
 
 import javax.persistence.Entity;

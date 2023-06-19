@@ -1,5 +1,7 @@
 package com.cjc.carloan.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,15 @@ public class CustomerServiceImpl implements CustomerService
 	     cr.save(cd);	
 		
 	}
+
+	@Override
+	public Iterable<CustomerDetails> getCustomer()
+	{
+		    
+		return cr.findAll();
+	}
+
+	
 	
 	
 
