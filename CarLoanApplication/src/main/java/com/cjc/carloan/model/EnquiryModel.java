@@ -1,9 +1,13 @@
 package com.cjc.carloan.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.Cascade;
 
 import lombok.Data;
 
@@ -21,5 +25,8 @@ public class EnquiryModel
 	private long mobileNumber;
 	private long adharNumber;
 	private String panCardNumber;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Cibil cibil;
+	private String enquiryStatus;
 	
 }

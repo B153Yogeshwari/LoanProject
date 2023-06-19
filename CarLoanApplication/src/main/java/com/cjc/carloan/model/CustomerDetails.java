@@ -1,12 +1,21 @@
+
 package com.cjc.carloan.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
 
 @Data
-public class CustomerDetails {
+@Entity
+public class CustomerDetails 
+{
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer customerId;
 	private String customerFirstName;
 	private String customerMiddleName;
