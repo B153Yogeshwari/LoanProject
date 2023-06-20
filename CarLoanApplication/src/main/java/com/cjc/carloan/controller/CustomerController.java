@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -86,7 +87,13 @@ public class CustomerController
 		
 		Iterable<CustomerDetails> cus = cs.getCustomer();
 			return new ResponseEntity<Iterable<CustomerDetails>>(cus,HttpStatus.ACCEPTED);
-		
+	
 	}
+// @GetMapping(value = "/getSingleCustomer/{customerId}")
+//	public ResponseEntity<Iterable<CustomerDetails>> getSingleCustomer(@PathVariable ("customerId") int customerId)
+//	{
+//		   CustomerDetails cd = cs.getSingleCustomer(customerId);
+//		return ResponseEntity<Iterable<CustomerDetails>>(cd,HttpStatus.ACCEPTED);
+//	}
 	
 }

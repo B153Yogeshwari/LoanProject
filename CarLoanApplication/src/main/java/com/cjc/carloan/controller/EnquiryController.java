@@ -1,10 +1,13 @@
 package com.cjc.carloan.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,8 @@ public class EnquiryController
 	
 	EnquiryService esi;
  
+	
+	// Post Enquiry Data
 	@PostMapping("/savedata")
 	public ResponseEntity<String>regdata(@RequestBody EnquiryModel em) 
 	{
@@ -28,12 +33,16 @@ public class EnquiryController
 		esi.saveData(em);
 		return new ResponseEntity<String>("saved",HttpStatus.CREATED);
 	}
-
+        
+	  // Get All Enquiry Data
 	@GetMapping("/getalldata")
 	public ResponseEntity<Iterable<EnquiryModel>> getAllData(){
+		
 		
 		Iterable<EnquiryModel> list=esi.getAllData();
 		return new ResponseEntity<Iterable<EnquiryModel>>(list,HttpStatus.ACCEPTED);
 		
 	}	
+	
+	
 }

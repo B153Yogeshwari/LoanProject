@@ -29,6 +29,18 @@ public class CustomerServiceImpl implements CustomerService
 		return cr.findAll();
 	}
 
+	@Override
+	public CustomerDetails getSingleCustomer(Integer customerId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+//	@Override
+//	public CustomerDetails getSingleCustomer(Integer customerId) {
+//		
+//		return cr.findById(customerId);
+//	}
+
 	
 	
 	

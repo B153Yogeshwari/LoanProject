@@ -10,6 +10,8 @@ import javax.persistence.OneToOne;
 
 import lombok.Data;
 
+
+
 @Data
 @Entity
 public class CustomerDetails 

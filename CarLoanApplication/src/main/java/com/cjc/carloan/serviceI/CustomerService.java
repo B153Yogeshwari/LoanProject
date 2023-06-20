@@ -12,6 +12,8 @@ public interface CustomerService {
 
 	public Iterable<CustomerDetails> getCustomer();
 
+	public CustomerDetails getSingleCustomer(Integer customerId);
+
 	
 	
 

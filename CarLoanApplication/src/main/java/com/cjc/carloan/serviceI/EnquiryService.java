@@ -9,5 +9,7 @@ public interface EnquiryService
 
 	public Iterable<EnquiryModel> getAllData();
 
+	
+
 	   
 }
