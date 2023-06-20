@@ -8,7 +8,9 @@ import com.cjc.carloan.model.EnquiryModel;
 
 @Repository
 public interface EnquiryRepository extends JpaRepository<EnquiryModel, Integer>
-{ 
+{
+
+	Iterable<EnquiryModel> findAllByCibilStatus(String status); 
  
 	
 	
