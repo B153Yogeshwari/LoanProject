@@ -31,8 +31,8 @@ public class CustomerDetails
 	private String customerQualification;
 	private String customerEmailId;
 	private Double customerTotalLoanRequired;
-	@OneToOne(cascade = CascadeType.ALL)
-	private Cibil customerCibilScore;
+	
+	private String customerCibilScore;
 	@OneToOne(cascade = CascadeType.ALL)
 	private AllPersonalDocuments documents;
 	private String customerLoanStatus;

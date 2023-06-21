@@ -99,7 +99,7 @@ public class CustomerController
 	
 	
 		     
-//		      @GetMapping(value = "/getSingleCustomer/{customerId}")
+//		      @GetMapping(value	 = "/getSingleCustomer/{customerId}")
 //	public ResponseEntity<CustomerDetails> getSingleCustomer(@PathVariable ("customerId") Integer customerId)
 //	{ 
 //		    	  

@@ -23,9 +23,11 @@ public class EnquiryServiceImpl implements EnquiryService
 	@Override
 	public Iterable<EnquiryModel> getAllData() 
 	{
-	    	return er.findAll();
+		
+		return er.findAll();
 	}
 
+	
 	
 	
 }
