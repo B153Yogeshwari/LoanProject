@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +28,7 @@ import com.cjc.carloan.serviceI.CustomerService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+@CrossOrigin("*")
 @RestController
 public class CustomerController 
 {
@@ -43,8 +44,7 @@ public class CustomerController
 			@RequestParam("photo") MultipartFile photo, @RequestParam("signature") MultipartFile signature,
 			@RequestParam("addressProof") MultipartFile addressproof, @RequestParam("panCard") MultipartFile pancard,
 			@RequestParam("adharCard") MultipartFile adharcard, @RequestPart("salarySlip") MultipartFile salaryslip,
-			@RequestParam("incomeTaxReturn") MultipartFile incometaxreturn, @RequestParam("bankCheque") MultipartFile bankcheque, 
-			@RequestParam("bankStatements") MultipartFile bankstatement) throws JsonMappingException, JsonProcessingException 
+			@RequestParam("incomeTaxReturn") MultipartFile incometaxreturn) throws JsonMappingException, JsonProcessingException 
 	{
 
 		         
@@ -63,8 +63,8 @@ public class CustomerController
 				apd.setAdharCard(addressproof.getBytes());
 				apd.setSalarySlip(salaryslip.getBytes());
 				apd.setIncomeTaxReturn(incometaxreturn.getBytes());
-				apd.setBankCheque(bankcheque.getBytes());
-				apd.setBankStatements(bankstatement.getBytes());
+				//apd.setBankCheque(bankcheque.getBytes());
+				//apd.setBankStatements(bankstatement.getBytes());
 				
 				  cd.setDocuments(apd);
 				  
