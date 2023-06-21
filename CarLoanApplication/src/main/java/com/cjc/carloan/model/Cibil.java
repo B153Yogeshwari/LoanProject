@@ -16,7 +16,7 @@ public class Cibil
 	private Integer cibilId;
 	private Integer cibilScore;
 	private String cibilScoreDate;
-	private String status;
+	private String cibilstatus;
 	private String remark;
 
 }

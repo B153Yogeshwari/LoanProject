@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.cjc.carloan.exception.CustomerNotFoundException;
 import com.cjc.carloan.model.AllPersonalDocuments;
 import com.cjc.carloan.model.CustomerDetails;
 
@@ -86,14 +87,25 @@ public class CustomerController
 
 		
 		Iterable<CustomerDetails> cus = cs.getCustomer();
-			return new ResponseEntity<Iterable<CustomerDetails>>(cus,HttpStatus.ACCEPTED);
+		     if(cus!=null) {
+		    	 
+		     return new ResponseEntity<Iterable<CustomerDetails>>(cus,HttpStatus.ACCEPTED);
+	     }
+		     else {
+		    	 throw new CustomerNotFoundException("Customer Not Found ");
+		     }
+
+		  }   
 	
-	}
-// @GetMapping(value = "/getSingleCustomer/{customerId}")
-//	public ResponseEntity<Iterable<CustomerDetails>> getSingleCustomer(@PathVariable ("customerId") int customerId)
-//	{
+	
+		     
+//		      @GetMapping(value = "/getSingleCustomer/{customerId}")
+//	public ResponseEntity<CustomerDetails> getSingleCustomer(@PathVariable ("customerId") Integer customerId)
+//	{ 
+//		    	  
 //		   CustomerDetails cd = cs.getSingleCustomer(customerId);
 //		return ResponseEntity<Iterable<CustomerDetails>>(cd,HttpStatus.ACCEPTED);
 //	}
+
 	
 }

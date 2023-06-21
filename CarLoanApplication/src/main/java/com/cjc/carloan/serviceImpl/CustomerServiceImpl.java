@@ -1,6 +1,7 @@
 package com.cjc.carloan.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,13 @@ public class CustomerServiceImpl implements CustomerService
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+//	@Override
+//	public CustomerDetails getSingleCustomer(Integer customerId) {
+//		Optional<CustomerDetails> data = cr.findById(customerId);
+//		CustomerDetails customerDetails = data.get();
+//		return customerDetails;
+//	}
 
 //	@Override
 //	public CustomerDetails getSingleCustomer(Integer customerId) {

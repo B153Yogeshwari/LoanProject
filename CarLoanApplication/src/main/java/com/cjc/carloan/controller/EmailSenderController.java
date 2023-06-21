@@ -8,16 +8,11 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.cjc.carloan.model.EmailSender;
 import com.cjc.carloan.model.EnquiryModel;
 import com.cjc.carloan.serviceI.EmailSendServiceI;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class EmailSenderController 
@@ -48,7 +43,11 @@ public class EmailSenderController
 		
 		
 		@PostMapping(value="/sendemailwithattachment")
-		public ResponseEntity<EmailSender>sendmailTouser(EnquiryModel enquirymodel,@RequestBody EmailSender emailsend){
+		public ResponseEntity<EmailSender>sendmailTouser(EnquiryModel enquirymodel,@RequestBody EmailSender emailsend)
+		{
+			System.out.println("cibil status "+enquirymodel.getCibil().getCibilstatus());
+			if(enquirymodel.getCibil().getCibilstatus().equals("approved"))
+			{
 			emailsend.setFromEmail(fromEmail);
 			emailsend.setToEmail(enquirymodel.getEmailId());
 			emailsend.setSubject("Regarding Car Loan For Documentation of Applicant name: "+ enquirymodel.getFirstName() +" "+ enquirymodel.getLastName());
@@ -74,19 +73,40 @@ public class EmailSenderController
 		      		+ "\n"
 		      		+ "Thank You For Banking With Us \n\n"
 		      		+ "AapkaApnaCarLoan Finance Ltd.....!!!!");
-			try {
-				esi.sendemail(emailsend);
-			} 
-			   catch (Exception e2) 
-			{
-				e2.printStackTrace();
-				return new ResponseEntity<EmailSender>(HttpStatus.OK);
-			}
-		return new ResponseEntity<EmailSender>(HttpStatus.OK);
 		
+				     esi.sendemail(emailsend);
+		
+				return new ResponseEntity<EmailSender>(HttpStatus.OK);
+			
+			}
+			else 
+			{
+				emailsend.setFromEmail(fromEmail);
+				emailsend.setToEmail(enquirymodel.getEmailId());
+				emailsend.setSubject("Regarding Your Car Loan Application Rejected" +enquirymodel.getFirstName()+" "+enquirymodel.getLastName());
+				emailsend.setTextBody("We regret to inform you that your recent application for a car loan has been rejected."
+						+ "We understand that this news may be disappointing, but we wanted to inform you promptly and provide "
+						+ "You with a brief explanation regarding the decision."
+						+ "After carefully reviewing your application and considering various factors, including your credit history and cibilScore"
+						+ "We have determined that we are unable to approve your car loan request at this time."
+						+ "If you have any questions or would like further clarification regarding our decision,"
+						+ "Please feel free to contact our customer service department at [phone number] or [email address]."
+						+ "Our team will be more than happy to assist you and provide any guidance or support you may need during this process."
+						+ "\n\nThank you"
+						+ "Mr.........."
+						+ "Branch Manager \\n\"\r\n"
+						+ "\nAapkaApnaCarLoan Finance Ltd. \\n Karvenagar \\n\"\r\n"
+						+ "\nPune, Maharashtra \\n India-411052\\n\"\r\n"
+						+ "\r\n"
+						+ "Thank You For Banking With Us \\n\\n\"\r\n"
+						+ "\nAapkaApnaCarLoan Finance Ltd.....!!!! ");
+			}
+		      return new ResponseEntity<EmailSender>(HttpStatus.OK);
+		     
+		   
+		   }
 		
 		}
-		
-	}
 
+	
 
