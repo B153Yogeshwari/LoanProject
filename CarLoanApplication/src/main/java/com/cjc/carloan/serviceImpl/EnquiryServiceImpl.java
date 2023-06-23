@@ -38,17 +38,18 @@ public class EnquiryServiceImpl implements EnquiryService
 	}
 
 	@Override
-	public Optional<EnquiryModel> saveEnquiry(Integer id) {
-		
-		return er.findById(id);
+	public EnquiryModel saveEnquiry(int id) 
+	{
+		  
+		return er.findAllByenquiryId(id);
 	}
 
-	
-	
-	
-     
-     
-     
-     
-     
+//	@Override
+//	public EnquiryModel getSingleEnquiry(int enquiryId) {
+//		     
+//		return er.findAllByenquiryId(enquiryId);
+//	}
+
+
+
 }

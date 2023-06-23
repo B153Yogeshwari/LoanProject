@@ -48,6 +48,14 @@ public class EnquiryController
 		
 	}	
 	
+//	@GetMapping("/singleEnquiry/{enquiryId}")
+//	public ResponseEntity<Integer> getSingleEnquiry(@PathVariable int enquiryId)
+//	{
+//		EnquiryModel enquiry = esi.getSingleEnquiry(enquiryId);
+//		return ResponseEntity<Integer>(enquiry,HttpStatus.ACCEPTED);
+//		
+//	}
+	
 	
 	@GetMapping("/getEnquiry/{enquiryId}")  // get cibilStatus
 	public ResponseEntity<Iterable<EnquiryModel>> getEnquiry(@PathVariable("enquiryId") String cibilstatus)
@@ -75,7 +83,7 @@ public class EnquiryController
 	
 	
 	@PutMapping("/CheckCIBIL/{enquiryId}")
-	public ResponseEntity<Optional<EnquiryModel>> checkCibilScore(@PathVariable("enquiryId") Integer Id,@RequestBody Cibil cibil)
+	public ResponseEntity<EnquiryModel> checkCibilScore(@PathVariable("enquiryId") Integer Id,@RequestBody Cibil cibil)
 	{
 		Random ramdom=new Random();
 		int cibilScore = ramdom.nextInt(600) + 300;
@@ -85,16 +93,16 @@ public class EnquiryController
 			cibil.setCibilstatus(String.valueOf(CibilStatus.approved));
 			cibil.setCibilScore(cibilScore);
 		
-		    Optional<EnquiryModel> enquiry = esi.saveEnquiry(Id);
+		    EnquiryModel enquiry = esi.saveEnquiry(Id);
 
 		    
-			return new ResponseEntity<Optional<EnquiryModel>>(enquiry,HttpStatus.OK);
+			return new ResponseEntity<EnquiryModel>(enquiry,HttpStatus.OK);
 		}
 		else
 		{
 			cibil.setCibilstatus(String.valueOf(CibilStatus.rejected));
 			cibil.setCibilScore(cibilScore);
-			Optional<EnquiryModel> enquiry = esi.saveEnquiry(Id);			
+			EnquiryModel enquiry = esi.saveEnquiry(Id);			
 		}
 		return null;
 

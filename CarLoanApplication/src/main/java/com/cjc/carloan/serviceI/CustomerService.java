@@ -18,6 +18,10 @@ public interface CustomerService
 
 	public Iterable<CustomerDetails> getCustomerbyStatus(String custloanstatus); // get customer loan status
 
+	public Optional<CustomerDetails> findById(Integer customerId);
+
+	public CustomerDetails updateCustomer(CustomerDetails customer);
+
 	
 	
       

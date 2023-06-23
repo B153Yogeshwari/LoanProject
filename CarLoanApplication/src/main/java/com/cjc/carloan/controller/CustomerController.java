@@ -44,9 +44,9 @@ public class CustomerController
      CustomerService cs;
 	 
 	 
-	 //Post All CustomerDetails Data
+	
 	 
-	@PostMapping(value = "/postCustomer")	
+	@PostMapping(value = "/postCustomer")	 //Post All CustomerDetails Data
 	public ResponseEntity<String> postCustomer(@RequestParam("allData") String allData,
 			@RequestParam("photo") MultipartFile photo, @RequestParam("signature") MultipartFile signature,
 			@RequestParam("addressProof") MultipartFile addressproof, @RequestParam("panCard") MultipartFile pancard,
@@ -54,11 +54,8 @@ public class CustomerController
 			@RequestParam("incomeTaxReturn") MultipartFile incometaxreturn) throws JsonMappingException, JsonProcessingException 
 	{
 
-		         
-	
-		     ObjectMapper om = new ObjectMapper();
-		
-		     CustomerDetails cd=om.readValue(allData, CustomerDetails.class);
+		       ObjectMapper om = new ObjectMapper();
+		      CustomerDetails cd=om.readValue(allData, CustomerDetails.class);
 		
 			try 
 			{
@@ -74,42 +71,33 @@ public class CustomerController
 				//apd.setBankStatements(bankstatement.getBytes());
 				
 				  cd.setDocuments(apd);
-				  
 				  cs.savedCustomer(cd);
 				
 			} catch (IOException e) 
 			{
-				
 				e.printStackTrace();
 			}
-			
-		
-		return new ResponseEntity<String>("Saved Customer All Details",HttpStatus.CREATED);
+			return new ResponseEntity<String>("Saved Customer All Details",HttpStatus.CREATED);
 	}
 	
 	                                     
 	@GetMapping(value="/getCustomer")	// Get all CustomerDetails
 	public ResponseEntity<Iterable<CustomerDetails>> getAllCustomer() 
 	{
-
-		
-		Iterable<CustomerDetails> cus = cs.getAllCustomer();
+       Iterable<CustomerDetails> cus = cs.getAllCustomer();
 		     if(cus!=null) {
-		    	 
 		     return new ResponseEntity<Iterable<CustomerDetails>>(cus,HttpStatus.ACCEPTED);
 	     }
-		     else {
-		    	 throw new CustomerNotFound("Customer Not Found ");
+		  else {
+		    throw new CustomerNotFound("Customer Not Found ");
 		     }
-
-		  }   
+		   }   
 	
 	
 		     
-		      @GetMapping(value	 = "/getSingleCustomer/{customerId}")
+   @GetMapping(value="/getSingleCustomer/{customerId}")
 	public ResponseEntity<Optional<CustomerDetails>>getSingleCustomer(@PathVariable ("customerId") Integer customerId)
 	{ 
-		    	  
 		   Optional<CustomerDetails> cd = cs.getSingleCustomer(customerId);
 		     if(cd.isPresent()) 
 		     {
@@ -121,25 +109,48 @@ public class CustomerController
 		     {
 		    	 throw new CustomerNotFound("Customer Not Found");
 		     }
-
-	}
-		      
-		      @GetMapping("/getCustomer/{custloanstatus}")	//get customer by loan status
+          }
+		     
+            @GetMapping("/getCustomer/{custloanstatus}")	//get customer by loan status
 		  	public ResponseEntity<Iterable<CustomerDetails>> getCustomerByStatus(
 		  			@PathVariable("custloanstatus") String custloanstatus) {
 		  	
 		  		Iterable<CustomerDetails> cst = cs.getCustomerbyStatus(custloanstatus);
-		  	
-		  		if (cst != null) {
-		  			
-		  			return new ResponseEntity<Iterable<CustomerDetails>>(cst, HttpStatus.OK);
-		  	}
-		  		else {
-		  			throw new CustomerNotFound("Customer Not Found");
-		  			
-		  		}
-		  	}
-		   
+		  	    if (cst != null) {
+		  		return new ResponseEntity<Iterable<CustomerDetails>>(cst, HttpStatus.OK);
+		  	   }
+		  	else {
+		  		throw new CustomerNotFound("Customer Not Found");
+		  	    }
+		 }
+		
+            @GetMapping(value ="/updateCustomer/{customerId}/{custloanstatus}")
+       	 public ResponseEntity<String> updateCustomer(@PathVariable ("custloanstatus") String loanStatus,
+       	                                              @PathVariable("customerId") Integer customerId) throws IOException {
+       	     Optional<CustomerDetails> customerDetails = cs.findById(customerId);
+
+       	     if (customerDetails.isPresent()) {
+       	         CustomerDetails customer = customerDetails.get();
+       	         
+       	         if (loanStatus.equals("documentverfied")) {
+       	             customer.setCustomerLoanStatus(String.valueOf(CustomerLoanStatus.DocumentVerified));
+       	             cs.updateCustomer(customer);
+       	         } else if (loanStatus.equals("documentrejected")) {
+       	             customer.setCustomerLoanStatus(String.valueOf(CustomerLoanStatus.DocumentRejected));
+       	             cs.updateCustomer(customer);
+       	         } else {
+       	             return new ResponseEntity<>("Invalid loan status value", HttpStatus.BAD_REQUEST);
+       	         }
+       	         return new ResponseEntity<>("Customer loan status updated successfully", HttpStatus.OK);
+       	     } else {
+       	        
+       	     }
+       		return null;
+       	 }
+
+
+
+       	
 		     
 }	
 

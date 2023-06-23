@@ -11,6 +11,8 @@ public interface EnquiryRepository extends JpaRepository<EnquiryModel, Integer>
 {
 
 	Iterable<EnquiryModel> findAllByEnquiryStatus(String cibilstatus);
+	
+	public EnquiryModel findAllByenquiryId(Integer enquiryId);
 
 	 
  
