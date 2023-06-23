@@ -17,42 +17,33 @@ public class CustomerServiceImpl implements CustomerService
 	CustomerRepository cr;
 
 	@Override
-	public void savedCustomer(CustomerDetails cd)
+	public void savedCustomer(CustomerDetails cd)  //save customer
 	{
 	     cr.save(cd);	
 		
 	}
 
+	 @Override
+	public Optional<CustomerDetails> getSingleCustomer(Integer customerId) //get single customer
+	 {
+		Optional<CustomerDetails> cd =cr.findById(customerId);
+		return cd;
+	}
+
 	@Override
-	public Iterable<CustomerDetails> getCustomer()
+	public Iterable<CustomerDetails> getAllCustomer()  // get All Customer
 	{
-		    
+		     
 		return cr.findAll();
 	}
 
-	@Override
-	public CustomerDetails getSingleCustomer(Integer customerId) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override    
+	public Iterable<CustomerDetails> getCustomerbyStatus(String custloanstatus) // get Customer loan Status
+	{
+		     
+		return cr.findAllByCustomerLoanStatus(custloanstatus);
 	}
 
-//	@Override
-//	public CustomerDetails getSingleCustomer(Integer customerId) {
-//		Optional<CustomerDetails> data = cr.findById(customerId);
-//		CustomerDetails customerDetails = data.get();
-//		return customerDetails;
-//	}
-
-//	@Override
-//	public CustomerDetails getSingleCustomer(Integer customerId) {
-//		
-//		return cr.findById(customerId);
-//	}
-
 	
 	
-	
-
-	
-
 }

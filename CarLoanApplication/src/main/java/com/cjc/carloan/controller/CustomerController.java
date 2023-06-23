@@ -6,6 +6,7 @@ package com.cjc.carloan.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,22 +15,28 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.cjc.carloan.exception.CustomerNotFoundException;
+import com.cjc.carloan.enums.CustomerLoanStatus;
+import com.cjc.carloan.exception.CustomerNotFound;
+
 import com.cjc.carloan.model.AllPersonalDocuments;
 import com.cjc.carloan.model.CustomerDetails;
 
 import com.cjc.carloan.serviceI.CustomerService;
+import com.cjc.carloan.serviceImpl.CustomerServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @CrossOrigin("*")
 @RestController
+@RequestMapping("cust")
 public class CustomerController 
 {
 	   
@@ -43,7 +50,7 @@ public class CustomerController
 	public ResponseEntity<String> postCustomer(@RequestParam("allData") String allData,
 			@RequestParam("photo") MultipartFile photo, @RequestParam("signature") MultipartFile signature,
 			@RequestParam("addressProof") MultipartFile addressproof, @RequestParam("panCard") MultipartFile pancard,
-			@RequestParam("adharCard") MultipartFile adharcard, @RequestPart("salarySlip") MultipartFile salaryslip,
+			@RequestParam("adharCard") MultipartFile adharcard, @RequestParam("salarySlip") MultipartFile salaryslip,
 			@RequestParam("incomeTaxReturn") MultipartFile incometaxreturn) throws JsonMappingException, JsonProcessingException 
 	{
 
@@ -77,35 +84,62 @@ public class CustomerController
 			}
 			
 		
-		return new ResponseEntity<String>("Saved",HttpStatus.CREATED);
+		return new ResponseEntity<String>("Saved Customer All Details",HttpStatus.CREATED);
 	}
 	
-	// Get all CustomerDetails
-	@GetMapping(value="/getCustomer")	
-	public ResponseEntity<Iterable<CustomerDetails>> getCustomer() 
+	                                     
+	@GetMapping(value="/getCustomer")	// Get all CustomerDetails
+	public ResponseEntity<Iterable<CustomerDetails>> getAllCustomer() 
 	{
 
 		
-		Iterable<CustomerDetails> cus = cs.getCustomer();
+		Iterable<CustomerDetails> cus = cs.getAllCustomer();
 		     if(cus!=null) {
 		    	 
 		     return new ResponseEntity<Iterable<CustomerDetails>>(cus,HttpStatus.ACCEPTED);
 	     }
 		     else {
-		    	 throw new CustomerNotFoundException("Customer Not Found ");
+		    	 throw new CustomerNotFound("Customer Not Found ");
 		     }
 
 		  }   
 	
 	
 		     
-//		      @GetMapping(value	 = "/getSingleCustomer/{customerId}")
-//	public ResponseEntity<CustomerDetails> getSingleCustomer(@PathVariable ("customerId") Integer customerId)
-//	{ 
-//		    	  
-//		   CustomerDetails cd = cs.getSingleCustomer(customerId);
-//		return ResponseEntity<Iterable<CustomerDetails>>(cd,HttpStatus.ACCEPTED);
-//	}
+		      @GetMapping(value	 = "/getSingleCustomer/{customerId}")
+	public ResponseEntity<Optional<CustomerDetails>>getSingleCustomer(@PathVariable ("customerId") Integer customerId)
+	{ 
+		    	  
+		   Optional<CustomerDetails> cd = cs.getSingleCustomer(customerId);
+		     if(cd.isPresent()) 
+		     {
+		    	 
+		     return new ResponseEntity<Optional<CustomerDetails>>(cd,HttpStatus.ACCEPTED);
+		   }
+		     
+		     else 
+		     {
+		    	 throw new CustomerNotFound("Customer Not Found");
+		     }
 
-	
-}
+	}
+		      
+		      @GetMapping("/getCustomer/{custloanstatus}")	//get customer by loan status
+		  	public ResponseEntity<Iterable<CustomerDetails>> getCustomerByStatus(
+		  			@PathVariable("custloanstatus") String custloanstatus) {
+		  	
+		  		Iterable<CustomerDetails> cst = cs.getCustomerbyStatus(custloanstatus);
+		  	
+		  		if (cst != null) {
+		  			
+		  			return new ResponseEntity<Iterable<CustomerDetails>>(cst, HttpStatus.OK);
+		  	}
+		  		else {
+		  			throw new CustomerNotFound("Customer Not Found");
+		  			
+		  		}
+		  	}
+		   
+		     
+}	
+

@@ -7,6 +7,8 @@ import com.cjc.carloan.model.CustomerDetails;
 
 @Repository
 public interface CustomerRepository extends JpaRepository<CustomerDetails, Integer>
-{ 
-      
+{
+	
+	
+	public Iterable<CustomerDetails> findAllByCustomerLoanStatus(String custloanstatus);
 }

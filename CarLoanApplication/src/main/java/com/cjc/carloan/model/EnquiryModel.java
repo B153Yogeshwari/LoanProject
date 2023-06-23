@@ -17,7 +17,7 @@ public class EnquiryModel
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer customerId;
+	private Integer enquiryId; 
 	private String firstName;
 	private String lastName;
 	private Integer age;

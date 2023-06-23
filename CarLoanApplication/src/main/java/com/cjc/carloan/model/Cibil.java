@@ -15,8 +15,8 @@ public class Cibil
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer cibilId;
 	private Integer cibilScore;
-	private String cibilScoreDate;
-	private String cibilstatus;
+	private String  cibilScoreDate;
+	private String  cibilstatus;
 	private String remark;
 
 }

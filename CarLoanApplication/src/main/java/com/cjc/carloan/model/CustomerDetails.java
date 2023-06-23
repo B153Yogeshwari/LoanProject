@@ -32,7 +32,7 @@ public class CustomerDetails
 	private String customerEmailId;
 	private Double customerTotalLoanRequired;
 	
-	private String customerCibilScore;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private AllPersonalDocuments documents;
 	private String customerLoanStatus;
