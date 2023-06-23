@@ -68,11 +68,11 @@ public class EmailSenderController
 		      		+ "\n \n Thanking You. \n"
 		      		+ "Mr..........\n"
 		      		+ "Branch Manager \n"
-		      		+ "AapkaApnaCarLoan Finance Ltd. \n Karvenagar \n"
+		      		+ "ApnaCarLoan Finance Ltd. \n Karvenagar \n"
 		      		+ "Pune, Maharashtra \n India-411052\n"
 		      		+ "\n"
 		      		+ "Thank You For Banking With Us \n\n"
-		      		+ "AapkaApnaCarLoan Finance Ltd.....!!!!");
+		      		+ "ApnaCarLoan Finance Ltd.....!!!!");
 		
 				     esi.sendemail(emailsend);
 		
@@ -95,11 +95,11 @@ public class EmailSenderController
 						+ "\n\nThank you"
 						+ "Mr.........."
 						+ "Branch Manager \\n\"\r\n"
-						+ "\nAapkaApnaCarLoan Finance Ltd. \\n Karvenagar \\n\"\r\n"
+						+ "\nApnaCarLoan Finance Ltd. \\n Karvenagar \\n\"\r\n"
 						+ "\nPune, Maharashtra \\n India-411052\\n\"\r\n"
 						+ "\r\n"
 						+ "Thank You For Banking With Us \\n\\n\"\r\n"
-						+ "\nAapkaApnaCarLoan Finance Ltd.....!!!! ");
+						+ "\nApnaCarLoan Finance Ltd.....!!!! ");
 			}
 		      return new ResponseEntity<EmailSender>(HttpStatus.OK);
 		     

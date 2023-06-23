@@ -16,7 +16,11 @@ public class GlobelExceptionHandler
 	{
 		return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
 	}
-	{
 	
+	   @ExceptionHandler(PdfNotGenerated.class)
+	  public ResponseEntity<String> PdfNotFoundException(PdfNotGenerated e)
+	  {
+		return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
+		   
 	}
 }
