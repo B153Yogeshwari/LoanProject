@@ -33,7 +33,7 @@ public class EnquiryController
 	@PostMapping("/savedata")   // post enquiry or save enquiry data
 	public ResponseEntity<String>regdata(@RequestBody EnquiryModel em) 
 	{
-		em.getCibil().setCibilstatus(String.valueOf(CibilStatus.pending));
+		em.setCibilStatus(String.valueOf(CibilStatus.pending));
 		esi.saveData(em);
 		return new ResponseEntity<String>("saved",HttpStatus.CREATED);
 	}
@@ -83,15 +83,15 @@ public class EnquiryController
 	
 	
 	@PutMapping("/CheckCIBIL/{enquiryId}")
-	public ResponseEntity<EnquiryModel> checkCibilScore(@PathVariable("enquiryId") Integer Id,@RequestBody Cibil cibil)
+	public ResponseEntity<EnquiryModel> checkCibilScore(@PathVariable("enquiryId") Integer Id,@RequestBody EnquiryModel e)
 	{
 		Random ramdom=new Random();
 		int cibilScore = ramdom.nextInt(600) + 300;
 		
 		if(cibilScore>=600 && cibilScore<=900) 
 		{
-			cibil.setCibilstatus(String.valueOf(CibilStatus.approved));
-			cibil.setCibilScore(cibilScore);
+			e.setCibilStatus(String.valueOf(CibilStatus.approved));
+			e.setCibilScore(cibilScore);
 		
 		    EnquiryModel enquiry = esi.saveEnquiry(Id);
 
@@ -100,8 +100,8 @@ public class EnquiryController
 		}
 		else
 		{
-			cibil.setCibilstatus(String.valueOf(CibilStatus.rejected));
-			cibil.setCibilScore(cibilScore);
+			e.setCibilStatus(String.valueOf(CibilStatus.rejected));
+			e.setCibilScore(cibilScore);
 			EnquiryModel enquiry = esi.saveEnquiry(Id);			
 		}
 		return null;

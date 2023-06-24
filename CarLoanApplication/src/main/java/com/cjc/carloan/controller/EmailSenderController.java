@@ -45,8 +45,8 @@ public class EmailSenderController
 		@PostMapping(value="/sendemailwithattachment")
 		public ResponseEntity<EmailSender>sendmailTouser(EnquiryModel enquirymodel,@RequestBody EmailSender emailsend)
 		{
-			System.out.println("cibil status "+enquirymodel.getCibil().getCibilstatus());
-			if(enquirymodel.getCibil().getCibilstatus().equals("approved"))
+			System.out.println("cibil status "+enquirymodel.getCibilStatus());
+			if(enquirymodel.getCibilStatus().equals("approved"))
 			{
 			emailsend.setFromEmail(fromEmail);
 			emailsend.setToEmail(enquirymodel.getEmailId());

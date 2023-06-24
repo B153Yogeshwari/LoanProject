@@ -34,7 +34,7 @@ public class EnquiryServiceImpl implements EnquiryService
 	public Iterable<EnquiryModel> getEnquiry(String cibilstatus)  // get enquiry cibilstatus
 	{
 		    
-		return er.findAllByEnquiryStatus(cibilstatus);
+		return er.findByCibilStatus(cibilstatus);
 	}
 
 	@Override
