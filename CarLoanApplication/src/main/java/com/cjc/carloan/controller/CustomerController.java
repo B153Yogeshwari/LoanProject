@@ -5,21 +5,18 @@ package com.cjc.carloan.controller;
 
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,7 +27,6 @@ import com.cjc.carloan.model.AllPersonalDocuments;
 import com.cjc.carloan.model.CustomerDetails;
 
 import com.cjc.carloan.serviceI.CustomerService;
-import com.cjc.carloan.serviceImpl.CustomerServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -46,7 +42,7 @@ public class CustomerController
 	 
 	
 	 
-	@PostMapping(value = "/postCustomer")	 //Post All CustomerDetails Data
+	@PostMapping(value = "/postCustomer",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)	 //Post All CustomerDetails Data
 	public ResponseEntity<String> postCustomer(@RequestParam("allData") String allData,
 			@RequestParam("photo") MultipartFile photo, @RequestParam("signature") MultipartFile signature,
 			@RequestParam("addressProof") MultipartFile addressproof, @RequestParam("panCard") MultipartFile pancard,
@@ -150,7 +146,6 @@ public class CustomerController
 
 
 
-       	
-		     
+    		     
 }	
 

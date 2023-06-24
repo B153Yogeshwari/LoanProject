@@ -10,6 +10,7 @@ public class CarLoanApplication {
 
 	public static void main(String[] args)
 	{
+		System.out.println("Application Start Now");
 		System.out.println("Thiis is Car Loan App");
 		SpringApplication.run(CarLoanApplication.class, args);
 	}
