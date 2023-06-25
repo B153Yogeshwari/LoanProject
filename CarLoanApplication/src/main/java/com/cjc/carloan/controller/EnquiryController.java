@@ -68,6 +68,8 @@ public class EnquiryController
 	}
 	@PutMapping("/CheckCIBIL/{enquiryId}")
 	public ResponseEntity<EnquiryModel> checkCibilScore(@PathVariable("enquiryId") Integer enquiryId,@RequestBody EnquiryModel e)
+
+	
 	{
 		Random ramdom=new Random();
 		int cibilScore = ramdom.nextInt(600) + 300;
@@ -86,14 +88,16 @@ public class EnquiryController
 		{
 			e.setCibilStatus(String.valueOf(CibilStatus.rejected));
 			e.setCibilScore(cibilScore);
+
 			EnquiryModel enquiry = esi.saveEnquiry(e);			
 		
 		 return new ResponseEntity<EnquiryModel>(enquiry,HttpStatus.OK);
+
 		}
 		
-	}
+	}}
 	
-}
+
 
 
 

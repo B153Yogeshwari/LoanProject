@@ -35,6 +35,7 @@ public class EnquiryServiceImpl implements EnquiryService
 	{
 		    
 		return er.findAllByCibilStatus(cibilstatus);
+
 	}
 
 	@Override

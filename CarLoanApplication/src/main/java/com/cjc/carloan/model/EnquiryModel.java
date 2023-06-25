@@ -29,6 +29,8 @@ public class EnquiryModel
 	
 	private Integer cibilScore;
 	
-	//private String enquiryStatus;
+
+	
+	
 	
 }
