@@ -8,17 +8,21 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cjc.carloan.exception.PdfNotGenerated;
 import com.cjc.carloan.model.CustomerDetails;
 import com.cjc.carloan.model.SanctionLetter;
 import com.cjc.carloan.serviceI.SanctionService;
-
+@CrossOrigin("*")
 @RestController
+@RequestMapping("/sanction")
 public class SanctionController 
 {
 	@Autowired
@@ -43,7 +47,7 @@ public class SanctionController
 	
 	
 	@PutMapping("/generatePdf/{customerId}")
-	public ResponseEntity<InputStreamResource> updateSactionLetter(@PathVariable("customerId") Integer customerId, @RequestBody SanctionLetter sanctionLetter) {
+	public ResponseEntity<InputStreamResource> updateSactionLetter1(@PathVariable("customerId") Integer customerId, @RequestBody SanctionLetter sanctionLetter) {
 	
 		CustomerDetails customerdetail = new CustomerDetails();
 		
@@ -54,6 +58,14 @@ public class SanctionController
 		return  ResponseEntity.ok().headers(headers)
 				.contentType(MediaType.APPLICATION_PDF).body(new InputStreamResource(customerdetails));
 
-	}
-	
-}
+	}}
+//	@PutMapping("/generatePdf/{customerid}")
+//	public ResponseEntity<CustomerDetails> updateSactionLetter(@PathVariable("customerid") Integer customerid, @RequestBody SanctionLetter sanctionLetter)throws PdfNotGenerated {
+////		Email email = new Email();
+//		CustomerDetails customerdetail = new CustomerDetails();
+////			email.setFromEmail(fromEmail);
+//			CustomerDetails cd = ss.generateSactionId(customerid, sanctionLetter);
+//			
+//				return new ResponseEntity<CustomerDetails>(cd, HttpStatus.OK);
+//	
+//}

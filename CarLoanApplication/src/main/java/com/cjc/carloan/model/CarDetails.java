@@ -13,10 +13,10 @@ public class CarDetails
 {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer CarId;
-	private String CarModel;
-	private String CarChassisNumber;
-	private Double CarPrice;
-    private String CarNumber;
-	private String CarRcBookNumber; 
+	private Integer carId;
+	private String carModel;
+	private String carChassisNumber;
+	private Double carPrice;
+//    private String CarNumber;
+//	private String CarRcBookNumber; 
 }

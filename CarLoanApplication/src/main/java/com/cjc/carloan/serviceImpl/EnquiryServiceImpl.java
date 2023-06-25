@@ -34,14 +34,14 @@ public class EnquiryServiceImpl implements EnquiryService
 	public Iterable<EnquiryModel> getEnquiry(String cibilstatus)  // get enquiry cibilstatus
 	{
 		    
-		return er.findAllByEnquiryStatus(cibilstatus);
+		return er.findAllByCibilStatus(cibilstatus);
 	}
 
 	@Override
-	public EnquiryModel saveEnquiry(int id) 
+	public EnquiryModel saveEnquiry(EnquiryModel e) 
 	{
 		  
-		return er.findAllByenquiryId(id);
+		return er.save(e);
 	}
 
 //	@Override

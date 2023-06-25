@@ -5,20 +5,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.http.ResponseEntity;
-
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cjc.carloan.model.EmailSender;
 import com.cjc.carloan.model.EnquiryModel;
 import com.cjc.carloan.serviceI.EmailSendServiceI;
-
+@CrossOrigin("*")
 @RestController
+@RequestMapping("/mail")
 public class EmailSenderController 
 	{
-		// @Autowired
-	    // EmailSender emailsend;  //Email model class obj
+//		 @Autowired
+//	     EmailSender emailsend;  //Email model class obj
 	
 		@Autowired
 		EmailSendServiceI esi;      
@@ -26,27 +28,27 @@ public class EmailSenderController
 	    @Value ("${spring.mail.username}")    //set email address here
 	     String fromEmail;
 	    
-	    @PostMapping(value = "/sendemail")
-		public String sendEmail(@RequestBody EmailSender e)
-		{
-			e.setFromEmail(fromEmail);
-			
-			try {
-				esi.sendemail(e);
-			}
-			catch(Exception e2)
-			{
-				return "email can not send";
-			}
-			return "Email Send";
-		}
+//	    @PostMapping(value = "/sendemail")
+//		public String sendEmail(@RequestBody EmailSender e)
+//		{
+//			e.setFromEmail(fromEmail);
+//			
+//			try {
+//				esi.sendemail(e);
+//			}
+//			catch(Exception e2)
+//			{
+//				return "email can not send";
+//			}
+//			return "Email Send";
+//		}
+//		
 		
-		
-		@PostMapping(value="/sendemailwithattachment")
-		public ResponseEntity<EmailSender>sendmailTouser(EnquiryModel enquirymodel,@RequestBody EmailSender emailsend)
+		@PostMapping(value="/sendemail")
+		public ResponseEntity<EmailSender>sendmailTouser(@RequestBody EnquiryModel enquirymodel,@RequestBody EmailSender emailsend)
 		{
-			System.out.println("cibil status "+enquirymodel.getCibil().getCibilstatus());
-			if(enquirymodel.getCibil().getCibilstatus().equals("approved"))
+			System.out.println("cibil status "+enquirymodel.getCibilStatus());
+			if(enquirymodel.getCibilStatus().equals("approved"))
 			{
 			emailsend.setFromEmail(fromEmail);
 			emailsend.setToEmail(enquirymodel.getEmailId());

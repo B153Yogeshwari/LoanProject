@@ -10,7 +10,7 @@ import com.cjc.carloan.model.EnquiryModel;
 public interface EnquiryRepository extends JpaRepository<EnquiryModel, Integer>
 {
 
-	Iterable<EnquiryModel> findAllByEnquiryStatus(String cibilstatus);
+	Iterable<EnquiryModel> findAllByCibilStatus(String cibilstatus);
 	
 	public EnquiryModel findAllByenquiryId(Integer enquiryId);
 

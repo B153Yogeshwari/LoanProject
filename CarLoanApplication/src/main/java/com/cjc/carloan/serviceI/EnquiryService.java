@@ -14,7 +14,7 @@ public interface EnquiryService
 
 	public Iterable<EnquiryModel> getEnquiry(String cibilstatus);
    
-	public EnquiryModel saveEnquiry(int id);
+	public EnquiryModel saveEnquiry(EnquiryModel e);
 
 	//public EnquiryModel getSingleEnquiry(int enquiryId);
 

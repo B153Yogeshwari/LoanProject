@@ -17,7 +17,7 @@ import lombok.Data;
 public class CustomerDetails 
 {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer customerId;
 	private String customerFirstName;
 	private String customerMiddleName;
@@ -31,25 +31,35 @@ public class CustomerDetails
 	private String customerQualification;
 	private String customerEmailId;
 	private Double customerTotalLoanRequired;
+	private Integer customerCibilScore;
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	private AllPersonalDocuments documents;
+	
 	private String customerLoanStatus;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private CarDetails carDetails;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private AccountDetails accountDetails;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private GuarantorDetails gurantorDetails;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerAddress customerAddress;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private LoanDisbursement loanDisbursement;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private Ledger ledger;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private SanctionLetter sanctionletter;
+	
 	@OneToOne(cascade = CascadeType.ALL)
 	private CustomerVerification customerVerification;
 	

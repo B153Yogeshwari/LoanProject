@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class SanctionLetter
 	private Integer loanTenure;
 	private Double monthlyEmiAmount;
 	private String termsAndCondition;
+	@Lob
 	private byte[] sanctionLetter;
 
 

@@ -25,8 +25,10 @@ public class EnquiryModel
 	private long mobileNumber;
 	private long adharNumber;
 	private String panCardNumber;
-	@OneToOne(cascade = CascadeType.ALL)
-	private Cibil cibil;
-	private String enquiryStatus;
+	private String cibilStatus;
+	
+	private Integer cibilScore;
+	
+	//private String enquiryStatus;
 	
 }

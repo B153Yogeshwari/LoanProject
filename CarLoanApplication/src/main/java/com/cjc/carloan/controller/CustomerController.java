@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +65,8 @@ public class CustomerController
 				apd.setAdharCard(addressproof.getBytes());
 				apd.setSalarySlip(salaryslip.getBytes());
 				apd.setIncomeTaxReturn(incometaxreturn.getBytes());
+				cd.setCustomerLoanStatus(String.valueOf(CustomerLoanStatus.pending));
+
 				//apd.setBankCheque(bankcheque.getBytes());
 				//apd.setBankStatements(bankstatement.getBytes());
 				
@@ -120,28 +124,35 @@ public class CustomerController
 		  	    }
 		 }
 		
-            @GetMapping(value ="/updateCustomer/{customerId}/{custloanstatus}")
-       	 public ResponseEntity<String> updateCustomer(@PathVariable ("custloanstatus") String loanStatus,
+            @PutMapping(value ="/updateCustomer/{customerId}")
+       	 public ResponseEntity<CustomerDetails> updateCustomer(@RequestBody String loanStatus,
        	                                              @PathVariable("customerId") Integer customerId) throws IOException {
        	     Optional<CustomerDetails> customerDetails = cs.findById(customerId);
 
        	     if (customerDetails.isPresent()) {
        	         CustomerDetails customer = customerDetails.get();
        	         
-       	         if (loanStatus.equals("documentverfied")) {
+       	         if (loanStatus.equals("documentverified")) 
+       	         {
+       	        	 
        	             customer.setCustomerLoanStatus(String.valueOf(CustomerLoanStatus.DocumentVerified));
-       	             cs.updateCustomer(customer);
-       	         } else if (loanStatus.equals("documentrejected")) {
+       	            CustomerDetails cd= cs.updateCustomer(customer);
+       	         return new ResponseEntity<CustomerDetails>(cd, HttpStatus.OK);
+       	         } 
+       	         else if (loanStatus.equals("documentrejected")) 
+       	         {
        	             customer.setCustomerLoanStatus(String.valueOf(CustomerLoanStatus.DocumentRejected));
-       	             cs.updateCustomer(customer);
-       	         } else {
-       	             return new ResponseEntity<>("Invalid loan status value", HttpStatus.BAD_REQUEST);
+       	            CustomerDetails cd= cs.updateCustomer(customer);
+       	         return new ResponseEntity<CustomerDetails>(cd, HttpStatus.OK);
+       	         
        	         }
-       	         return new ResponseEntity<>("Customer loan status updated successfully", HttpStatus.OK);
-       	     } else {
+       	         else
+       	         {
+       	             return new ResponseEntity<CustomerDetails>( HttpStatus.BAD_REQUEST);
+       	         }
        	        
        	     }
-       		return null;
+			return null; 
        	 }
 
 
